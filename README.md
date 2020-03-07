@@ -1,2 +1,2 @@
 # Flower-Bots
-Out coding resources for all of our robots. Current: RosemarVII &amp; Sunflower
+Our coding resources for all of our robots. Current: Rosemary || &amp; Sunflower
