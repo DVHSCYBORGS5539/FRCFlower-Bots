@@ -1,1 +1,21 @@
+// This code is for our Robot, Rosemary || for the FRC 2020 Competition
+
+// Coding for the Autonomous Actions at the beginning of the match
+
+frc2::Command* GetAutonomousCommand();
+  frc2::InstantCommand m_autonomousCommand
+  {
+    [this] 
+    {frc::Timer timer;
+      timer.Start();
+      double start=timer.Get();
+      m_drive.Move();
+      while(timer.Get()-start<2.0)
+      {
+      
+      }
+      m_drive.Stop();
+
+    },{&m_drive}
+  };
 
