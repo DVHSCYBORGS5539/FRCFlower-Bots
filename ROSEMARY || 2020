@@ -18,4 +18,81 @@ frc2::Command* GetAutonomousCommand();
 
     },{&m_drive}
   };
+  
+  
+  // RobotContainerCode
+  
+  #pragma once
+
+#include <frc/TimedRobot.h>
+#include <frc2/command/Command.h>
+
+#include "RobotContainer.h"
+
+class Robot : public frc::TimedRobot {
+ public:
+  void RobotInit() override;
+  void RobotPeriodic() override;
+  void DisabledInit() override;
+  void DisabledPeriodic() override;
+  void AutonomousInit() override;
+  void AutonomousPeriodic() override;
+  void TeleopInit() override;
+  void TeleopPeriodic() override;
+  void TestPeriodic() override;
+
+ private:
+  // Have it null by default so that if testing teleop it
+  // doesn't have undefined behavior and potentially crash.
+  frc2::Command* m_autonomousCommand = nullptr;
+
+  RobotContainer m_container;
+};
+
+// Coding meant for our driving teleop with the xbox one controller
+
+#include <frc/XboxController.h>
+#include <frc/Talon.h>
+#include <frc/SampleRobot.h>
+#include <frc/drive/DifferentialDrive.h>
+#include <frc/smartdashboard/SendableChooser.h>
+#include <frc/DoubleSolenoid.h>
+#include <frc/Servo.h>
+#include <frc/Compressor.h>
+
+/**
+ * This is a demo program showing the use of the DifferentialDrive class. The
+ * SampleRobot class is the base of a robot application that will automatically
+ * call your Autonomous and OperatorControl methods at the right time as
+ * controlled by the switches on the driver station or the field controls.
+ *
+ * WARNING: While it may look like a good choice to use for your code if you're
+ * inexperienced, don't. Unless you know what you are doing, complex code will
+ * be much more difficult under this system. Use TimedRobot or Command-Based
+ * instead if you're new.
+ */
+using namespace frc;
+class Robot : public frc::SampleRobot 
+{
+ public:
+  Robot();
+
+  void RobotInit() override;
+  void Autonomous() override;
+  void OperatorControl() override;
+  void Test() override;
+
+ private:
+  // Robot drive system
+  Talon m_leftBackMotor {1};
+  Talon m_leftFrontMotor {2};
+  Talon m_rightBackMotor {4};
+  Talon m_rightFrontMotor {3};
+
+  frc::XboxController m_joystick{0};
+
+  DoubleSolenoid m_frontPistons {0,1};
+  DoubleSolenoid m_backPistons {2,3};
+
+  DoubleSolenoid m_clawExtend {4,5};
 
